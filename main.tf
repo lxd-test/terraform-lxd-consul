@@ -28,11 +28,11 @@ data "template_file" "template" {
 }
 
 resource "lxd_container" "consul" {
-  for_each  = toset(var.lxd-profile)
-  name      = "${format("consul%02d", index(var.lxd-profile, each.value) + 1)}-${var.role}"
+  count.    = length(var.lxd-profile)
+  name      = "${format("consul%02d", count.index + 1)}-${var.role}"
   image     = "packer-consul"
   ephemeral = false
-  profiles  = [each.value]
+  profiles  = [ var.lxd-profile[count.index] ]
 
   config = {
     "user.user-data" = data.template_file.template.rendered
