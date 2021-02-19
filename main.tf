@@ -28,7 +28,7 @@ data "template_file" "template" {
 }
 
 resource "lxd_container" "consul" {
-  count.    = length(var.lxd-profile)
+  count     = length(var.lxd-profile)
   name      = "${format("consul%02d", count.index + 1)}-${var.role}"
   image     = "packer-consul"
   ephemeral = false
