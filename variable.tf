@@ -14,6 +14,10 @@ variable "image" {
   default = "images:ubuntu/bionic"
 }
 
+variable "prefix" {
+  default = "consul"
+}
+
 variable "role" {
   type    = string
   default = "primary"
