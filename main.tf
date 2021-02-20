@@ -19,10 +19,10 @@ data "template_file" "template" {
   template = data.http.template.body
   vars = {
     dc              = var.dc-name,
-    iface           = "eth0",
+    iface           = var.iface,
     consul_count    = length(var.lxd-profile),
     consul_server   = "consul01-${var.role}",
-    consul_wan_join = var.dc-name == "az1" ? "" : "consul01-primary"
+    consul_wan_join = var.role == "primary" ? "" : "consul01-primary"
     license         = var.license
   }
 }
@@ -30,7 +30,7 @@ data "template_file" "template" {
 resource "lxd_container" "consul" {
   count     = length(var.lxd-profile)
   name      = "${format("consul%02d", count.index + 1)}-${var.role}"
-  image     = "packer-consul"
+  image     = var.image
   ephemeral = false
   profiles  = [ var.lxd-profile[count.index] ]
 
