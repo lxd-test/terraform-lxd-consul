@@ -37,5 +37,5 @@ variable "template" {}
 
 variable "wan_join" {
   type    = string
-  default = "consul01-primary"
+  default = null #"consul01-primary"
 }
