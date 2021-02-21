@@ -22,7 +22,7 @@ data "template_file" "template" {
     iface           = var.iface,
     consul_count    = length(var.lxd-profile),
     consul_server   = "consul01-${var.role}",
-    consul_wan_join = var.role == "primary" ? "" : "consul01-primary"
+    consul_wan_join = var.wan_join
     license         = var.license
   }
 }
