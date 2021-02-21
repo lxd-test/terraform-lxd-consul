@@ -34,3 +34,8 @@ variable "license" {
 }
 
 variable "template" {}
+
+variable "wan_join" {
+  type    = string
+  default = "consul01-primary"
+}
