@@ -35,7 +35,7 @@ variable "license" {
 
 variable "template" {}
 
-variable "consul_wan_join" {
+variable "consul-wan-join" {
   type    = string
   default = ""
 }
